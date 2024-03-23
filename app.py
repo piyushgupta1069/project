@@ -28,7 +28,7 @@ class Video(db.Model):
 @celery.task
 def fetch_videos():
     # Fetch videos from YouTube API
-    api_key = "AIzaSyAx__tOMpI2zsX_ZT2I7TBvv3u9AHw04U0"
+    api_key = os.getenv("api_key")
     search_query = "python+web+development"
     published_after = (datetime.utcnow() - timedelta(minutes=14400)).isoformat()  # Example: Fetch videos published in the last 1 day
     url = f'https://www.googleapis.com/youtube/v3/search?key={api_key}&q={search_query}&part=snippet&type=video&order=date&publishedAfter={published_after}&maxResults=10'
